@@ -61,9 +61,12 @@ func (rw *HeaderRewriter) Rewrite(req *http.Request) {
 		req.Header.Set(XForwardedPort, forwardedPort(req))
 	}
 
-	if xfHost := req.Header.Get(XForwardedHost); xfHost == "" && req.Host != "" {
-		req.Header.Set(XForwardedHost, req.Host)
-	}
+	//
+	// Disable default XForwardedHost setup
+	//
+	//	if xfHost := req.Header.Get(XForwardedHost); xfHost == "" && req.Host != "" {
+	//		req.Header.Set(XForwardedHost, req.Host)
+	//	}
 
 	if rw.Hostname != "" {
 		req.Header.Set(XForwardedServer, rw.Hostname)
